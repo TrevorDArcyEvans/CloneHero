@@ -20,9 +20,7 @@ import javafx.util.Duration;
 
 import java.io.File;
 
-
 public class EditorController {
-
     private Press actualPress;
     private Saver saver;
     private MediaPlayer mediaPlayer;

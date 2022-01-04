@@ -34,7 +34,6 @@ public class PressChartTest extends TestCase {
             assertEquals(expected[i], actual[i]);
         }
 
-
         actual = ps.next(21.0).getChords();
         expected = new boolean[]{false, false, false, false, true};
         for (int i = 0; i < actual.length; i++) {
@@ -65,7 +64,5 @@ public class PressChartTest extends TestCase {
         } catch (Exception e) {
             //Expected
         }
-
     }
-
 }

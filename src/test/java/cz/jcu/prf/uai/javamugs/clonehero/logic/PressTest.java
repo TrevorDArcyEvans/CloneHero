@@ -16,5 +16,4 @@ public class PressTest extends TestCase {
         Press press = new Press(Chord.MAGENTA, 500.0);
         assertEquals(500.0, press.getDrawTime());
     }
-
 }

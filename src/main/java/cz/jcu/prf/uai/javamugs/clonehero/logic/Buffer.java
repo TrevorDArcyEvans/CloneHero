@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * Created by ivank on 04.07.2017.
  */
 public class Buffer {
-
     private ArrayList<BufferRecord> bufferRecords;
     private int tolerance;
 

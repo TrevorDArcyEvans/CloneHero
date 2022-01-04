@@ -9,7 +9,7 @@ import junit.framework.TestCase;
  * @author Daniel Hryzbil
  */
 public class GameTest extends TestCase {
-	
+
 	private static final double TIME_OFFSET = 1000.0;
 	private static final byte DIFFICULTY = 2;
 	

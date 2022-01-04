@@ -2,13 +2,13 @@ package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
 public class Chord {
 
-    private boolean[] arr = new boolean[5];
-
     public static final int RED = 0;
     public static final int YELLOW = 1;
     public static final int GREEN = 2;
     public static final int BLUE = 3;
     public static final int MAGENTA = 4;
+
+    private boolean[] arr = new boolean[5];
 
     /**
      * Constructor, set up all variables

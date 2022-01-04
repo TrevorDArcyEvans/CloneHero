@@ -1,6 +1,5 @@
 package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
-
 public class Press {
 
     private int color;

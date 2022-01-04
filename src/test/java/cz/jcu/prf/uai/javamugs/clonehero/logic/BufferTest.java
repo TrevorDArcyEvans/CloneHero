@@ -20,5 +20,4 @@ public class BufferTest extends TestCase {
         report = buffer.check(new Chord(false, false, false, false, false), 2251);
         assertEquals(1, report.getMiss());
     }
-
 }

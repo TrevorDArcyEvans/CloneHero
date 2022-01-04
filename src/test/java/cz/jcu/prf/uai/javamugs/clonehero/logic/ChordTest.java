@@ -17,5 +17,4 @@ public class ChordTest extends TestCase {
         assertFalse(arr[Chord.BLUE]);
         assertTrue(arr[Chord.MAGENTA]);
     }
-
 }

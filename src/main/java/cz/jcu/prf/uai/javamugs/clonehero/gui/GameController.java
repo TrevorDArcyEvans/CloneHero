@@ -25,6 +25,11 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class GameController {
+    public Canvas canvas;
+    public BorderPane rootContainer;
+    public Label scoreLabel;
+    public Label multiplierLabel;
+
     private Stage stage;
     private Game game;
     private MediaPlayer mediaPlayer;
@@ -34,13 +39,8 @@ public class GameController {
     private AnimationTimer mainCycle;
     private int[] highlightedStrings = new int[5];
     private int[] lights = new int[5];
-    Random random = new Random();
+    private Random random = new Random();
     private Image background;
-
-    public Canvas canvas;
-    public BorderPane rootContainer;
-    public Label scoreLabel;
-    public Label multiplierLabel;
 
     public void setGame(Game game) {
         this.game = game;

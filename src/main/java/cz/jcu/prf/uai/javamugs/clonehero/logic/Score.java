@@ -6,7 +6,6 @@ package cz.jcu.prf.uai.javamugs.clonehero.logic;
  * @author Daniel Hryzbil
  */
 public class Score {
-
     private long score;
     private double multiplier;
 

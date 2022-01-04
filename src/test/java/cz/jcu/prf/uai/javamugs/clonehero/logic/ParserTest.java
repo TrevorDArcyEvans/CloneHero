@@ -5,7 +5,6 @@ import junit.framework.TestCase;
 import java.io.IOException;
 
 public class ParserTest extends TestCase {
-
     private static final String TEST_CHARTS_PATH = "./tracks/testCharts/";
     private static final String VALID_FILE_PATH = TEST_CHARTS_PATH + "ValidChart.prc";
     private static final String MISSING_EXTENSION_PATH = TEST_CHARTS_PATH + "MissingExtension";

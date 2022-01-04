@@ -6,7 +6,6 @@ package cz.jcu.prf.uai.javamugs.clonehero.logic;
  * @author Daniel Hryzbil
  */
 public class Game {
-
     public static final int SCORE_BASE = 100;
     public static final double MULTIPLIER_BASE_EASY = 0.2;
     public static final double MULTIPLIER_BASE_NORMAL = 0.5;

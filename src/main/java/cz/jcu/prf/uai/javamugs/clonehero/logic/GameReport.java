@@ -6,7 +6,6 @@ package cz.jcu.prf.uai.javamugs.clonehero.logic;
  * @author Daniel Hryzbil
  */
 public class GameReport {
-
     private Score score;
     private Chord chordToDraw;
     private Chord hitChord;

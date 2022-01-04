@@ -1,6 +1,5 @@
 package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Saver {
-
     private List<Press> toSave;
 
     public Saver() {
@@ -56,7 +54,5 @@ public class Saver {
         } catch (IOException e) {
             throw new IOException("Problem with writing specified file: " + e.getMessage());
         }
-
     }
-
 }

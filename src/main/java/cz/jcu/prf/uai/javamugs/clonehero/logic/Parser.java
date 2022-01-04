@@ -1,6 +1,5 @@
 package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -12,9 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 public class Parser {
-
     private static final int B_SIZE_LIMIT = 5 * 1024 * 1024;
     private static final int COLOR_MAX = 4;
     private static final int COLOR_MIN = 0;

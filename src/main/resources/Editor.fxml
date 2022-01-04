@@ -9,99 +9,102 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jcu.prf.uai.javamugs.clonehero.gui.EditorController">
-   <center>
-      <BorderPane maxWidth="350.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <left>
-            <StackPane BorderPane.alignment="CENTER">
-               <children>
-                  <Circle fx:id="circle0" fill="#e00d0d" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Label text="A">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-         </left>
-         <right>
-            <StackPane BorderPane.alignment="CENTER">
-               <children>
-                  <Circle fx:id="circle4" fill="#d811cb" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                  <Label text="L">
-                     <font>
-                        <Font size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </StackPane>
-         </right>
-         <center>
-            <BorderPane maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <left>
-                  <StackPane BorderPane.alignment="CENTER">
-                     <children>
-                        <Circle fx:id="circle1" fill="YELLOW" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Label text="S">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-               </left>
-               <center>
-                  <StackPane BorderPane.alignment="CENTER">
-                     <children>
-                        <Circle fx:id="circle2" fill="#20aa22" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Label text="D">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-               </center>
-               <right>
-                  <StackPane BorderPane.alignment="CENTER">
-                     <children>
-                        <Circle fx:id="circle3" fill="#0083ff" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                        <Label text="K">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-               </right>
-            </BorderPane>
-         </center>
-         <bottom>
-            <BorderPane>
-               <right>
-                  <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveBtn" text="Save" BorderPane.alignment="CENTER" />
-               </right>
-               <left>
-                  <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startBtnAction" text="Start" BorderPane.alignment="CENTER" />
-               </left>
-               <padding>
-                  <Insets bottom="10.0" />
-               </padding>
-            </BorderPane>
-         </bottom>
-         <top>
-            <Label fx:id="countLabel" maxHeight="50.0" minHeight="0.0" prefHeight="40.0" text="Editor" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="25.0" />
-               </font>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
+  xmlns="http://javafx.com/javafx/8.0.112"
+  xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jcu.prf.uai.javamugs.clonehero.gui.EditorController">
+  <center>
+    <BorderPane maxWidth="350.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <left>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+            <Circle fx:id="circle0" fill="#e00d0d" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label text="A">
+              <font>
+                <Font size="25.0" />
+              </font>
             </Label>
-         </top>
-      </BorderPane>
-   </center>
-   <right>
-      <TextArea fx:id="textPresses" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <font>
-            <Font size="14.0" />
-         </font></TextArea>
-   </right>
+          </children>
+        </StackPane>
+      </left>
+      <right>
+        <StackPane BorderPane.alignment="CENTER">
+          <children>
+            <Circle fx:id="circle4" fill="#d811cb" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label text="L">
+              <font>
+                <Font size="25.0" />
+              </font>
+            </Label>
+          </children>
+        </StackPane>
+      </right>
+      <center>
+        <BorderPane maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+          <left>
+            <StackPane BorderPane.alignment="CENTER">
+              <children>
+                <Circle fx:id="circle1" fill="YELLOW" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                <Label text="S">
+                  <font>
+                    <Font size="25.0" />
+                  </font>
+                </Label>
+              </children>
+            </StackPane>
+          </left>
+          <center>
+            <StackPane BorderPane.alignment="CENTER">
+              <children>
+                <Circle fx:id="circle2" fill="#20aa22" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                <Label text="D">
+                  <font>
+                    <Font size="25.0" />
+                  </font>
+                </Label>
+              </children>
+            </StackPane>
+          </center>
+          <right>
+            <StackPane BorderPane.alignment="CENTER">
+              <children>
+                <Circle fx:id="circle3" fill="#0083ff" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                <Label text="K">
+                  <font>
+                    <Font size="25.0" />
+                  </font>
+                </Label>
+              </children>
+            </StackPane>
+          </right>
+        </BorderPane>
+      </center>
+      <bottom>
+        <BorderPane>
+          <right>
+            <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#saveBtn" text="Save" BorderPane.alignment="CENTER" />
+          </right>
+          <left>
+            <Button fx:id="startBtn" mnemonicParsing="false" onAction="#startBtnAction" text="Start" BorderPane.alignment="CENTER" />
+          </left>
+          <padding>
+            <Insets bottom="10.0" />
+          </padding>
+        </BorderPane>
+      </bottom>
+      <top>
+        <Label fx:id="countLabel" maxHeight="50.0" minHeight="0.0" prefHeight="40.0" text="Editor" BorderPane.alignment="CENTER">
+          <font>
+            <Font size="25.0" />
+          </font>
+        </Label>
+      </top>
+    </BorderPane>
+  </center>
+  <right>
+    <TextArea fx:id="textPresses" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <font>
+        <Font size="14.0" />
+      </font>
+    </TextArea>
+  </right>
 </BorderPane>

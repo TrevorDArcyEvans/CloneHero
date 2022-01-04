@@ -3,7 +3,6 @@ package cz.jcu.prf.uai.javamugs.clonehero.logic;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
-
 public class PressChart {
 
     private Press[] presses;
