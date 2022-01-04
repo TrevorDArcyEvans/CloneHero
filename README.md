@@ -10,3 +10,21 @@ Daniel Hryzbil
 ![screenshot](https://raw.githubusercontent.com/JavaMugs/CloneHero/master/screenshot.jpg)
   
 Sample music is downloaded from here: http://freemusicarchive.org/music/Baby_Shakes/Live_at_Monty_Hall_5192017/Baby_Shakes_1_Intro
+
+## Prerequisites
+* git
+* Java SDK
+* [JavaFX SDk](https://openjfx.io/index.html) 
+* maven
+
+## Getting started
+
+```bash
+$ git clone https://github.com/TrevorDArcyEvans/CloneHero.git
+$ cd CloneHero
+$ mvn clean
+$ mvn compile
+$ mvn test
+$ mvn package
+```
+
