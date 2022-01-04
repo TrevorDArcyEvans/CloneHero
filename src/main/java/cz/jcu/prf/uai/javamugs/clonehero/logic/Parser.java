@@ -95,5 +95,4 @@ public class Parser {
             throw new IOException("Error opening file.");
         }
     }
-
 }
