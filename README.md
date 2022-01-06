@@ -14,7 +14,7 @@ Sample music is downloaded from here: http://freemusicarchive.org/music/Baby_Sha
 ## Prerequisites
 * git
 * Java SDK
-* [JavaFX SDk](https://openjfx.io/index.html) 
+* [JavaFX SDK](https://openjfx.io/index.html) 
 * maven
 
 ## Getting started
@@ -27,4 +27,8 @@ $ mvn compile
 $ mvn test
 $ mvn package
 ```
+
+## Architecture
+![uml](CloneHero.png)
+
 
