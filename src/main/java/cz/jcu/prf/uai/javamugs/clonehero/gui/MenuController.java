@@ -4,8 +4,6 @@ import cz.jcu.prf.uai.javamugs.clonehero.logic.Game;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Parser;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.PressChart;
 import javafx.beans.binding.Bindings;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,12 +13,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
-import java.net.URI;
 import java.util.Locale;
 
 public class MenuController
@@ -35,8 +30,6 @@ public class MenuController
   public BorderPane rootContainer;
 
   private Stage stage;
-  private EditorController editorController;
-  private GameController gameController;
 
   /**
    * Method to be called on start, after initialization
@@ -50,22 +43,15 @@ public class MenuController
     songs.getSelectionModel().selectFirst();
     rootContainer.setBackground(new Background(new BackgroundImage(new Image(getClass().getResource("/splash.jpg").toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null)));
     this.stage = (Stage) rootContainer.getScene().getWindow();
-    stage.setOnCloseRequest(new EventHandler<WindowEvent>()
-    {
-      public void handle(WindowEvent we)
-      {
-        System.exit(0);
-      }
-    });
+    stage.setOnCloseRequest(we -> System.exit(0));
     difficultyLabel.textProperty().bind(Bindings.format("%.0f", difficultySlider.valueProperty()));
   }
 
   /**
    * Method to be called on play button click
    *
-   * @param event click event
    */
-  public void playButtonAction(ActionEvent event)
+  public void playButtonAction()
   {
     // TODO   remove FileChooser
     var selSong = songs.getValue();
@@ -127,7 +113,7 @@ public class MenuController
     {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game.fxml"));
       Parent root = loader.load();
-      gameController = (GameController) loader.getController();
+      GameController gameController = loader.getController();
       gameController.setGame(game);
       gameController.setSongURIstring(songURIstring);
       Stage gameStage = new Stage();
@@ -148,15 +134,14 @@ public class MenuController
   /**
    * Method to be called on editor button click
    *
-   * @param event click event
    */
-  public void editorButtonAction(ActionEvent event)
+  public void editorButtonAction()
   {
     try
     {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/Editor.fxml"));
       Parent root = loader.load();
-      editorController = (EditorController) loader.getController();
+      EditorController editorController = loader.getController();
       FileChooser fileChooser = GetFileChooser();
       fileChooser.setTitle("Select song");
       fileChooser.getExtensionFilters().clear();
@@ -185,9 +170,8 @@ public class MenuController
   /**
    * Method to be called on exit button click
    *
-   * @param event click event
    */
-  public void exitButtonAction(ActionEvent event)
+  public void exitButtonAction()
   {
     stage.close();
   }

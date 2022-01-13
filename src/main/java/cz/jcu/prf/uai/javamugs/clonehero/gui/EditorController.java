@@ -5,7 +5,6 @@ import cz.jcu.prf.uai.javamugs.clonehero.logic.Press;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Saver;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -15,7 +14,6 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -58,7 +56,7 @@ public class EditorController
   /**
    * Throw actual press to textarea
    *
-   * @param press
+   * @param press key press
    */
   private void setNewPressToTextarea(Press press)
   {
@@ -83,7 +81,7 @@ public class EditorController
         break;
     }
 
-    textPresses.setText(colorName + "\t= " + Double.toString(round(press.getDrawTime(), 4)) + "\n" + textPresses.getText());
+    textPresses.setText(colorName + "\t= " + round(press.getDrawTime(), 4) + "\n" + textPresses.getText());
   }
 
   /**
@@ -106,38 +104,7 @@ public class EditorController
    */
   private void startListenButtons()
   {
-    startBtn.getScene().setOnKeyPressed(new EventHandler<KeyEvent>()
-    {
-      public void handle(KeyEvent ke)
-      {
-        switch (ke.getCode())
-        {
-          case A:
-            actualPress = new Press(Chord.RED, mediaPlayer.getCurrentTime().toMillis());
-            setFadeIn(circle0);
-            break;
-          case S:
-            actualPress = new Press(Chord.YELLOW, mediaPlayer.getCurrentTime().toMillis());
-            setFadeIn(circle1);
-            break;
-          case D:
-            actualPress = new Press(Chord.GREEN, mediaPlayer.getCurrentTime().toMillis());
-            setFadeIn(circle2);
-            break;
-          case K:
-            actualPress = new Press(Chord.BLUE, mediaPlayer.getCurrentTime().toMillis());
-            setFadeIn(circle3);
-            break;
-          case L:
-            actualPress = new Press(Chord.MAGENTA, mediaPlayer.getCurrentTime().toMillis());
-            setFadeIn(circle4);
-            break;
-        }
-
-        setNewPressToTextarea(actualPress);
-        saver.addPress(actualPress);
-      }
-    });
+    startBtn.getScene().setOnKeyPressed(this::handleNoteButtons);
   }
 
   /**
@@ -150,9 +117,7 @@ public class EditorController
       fileChooser.setTitle("Select PressChart file");
       fileChooser.getExtensionFilters().clear();
       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PressChart file", "*.prc"));
-      File pressChartFile = null;
-      pressChartFile = fileChooser.showSaveDialog(startBtn.getScene().getWindow());
-
+      File pressChartFile = fileChooser.showSaveDialog(startBtn.getScene().getWindow());
       if (pressChartFile == null)
       {
         return;
@@ -170,7 +135,7 @@ public class EditorController
   /**
    * Start view
    *
-   * @param path
+   * @param path FQ path to mp3 file
    */
   public void start(String path)
   {
@@ -178,20 +143,17 @@ public class EditorController
     saveBtn.setVisible(false);
 
     Stage stage = (Stage) startBtn.getScene().getWindow();
-    stage.setOnCloseRequest(new EventHandler<WindowEvent>()
+    stage.setOnCloseRequest(we ->
     {
-      public void handle(WindowEvent we)
+      try
       {
-        try
-        {
-          mediaPlayer.stop();
-        }
-        catch (Exception e)
-        {
-          //Sometimes expected ;)
-        }
-        mediaPlayer = null;
+        mediaPlayer.stop();
       }
+      catch (Exception e)
+      {
+        //Sometimes expected ;)
+      }
+      mediaPlayer = null;
     });
 
     isRecording = false;
@@ -201,9 +163,8 @@ public class EditorController
   /**
    * FE start/stop button
    *
-   * @param event
    */
-  public void startBtnAction(ActionEvent event)
+  public void startBtnAction()
   {
     if (!isRecording)
     {
@@ -235,10 +196,40 @@ public class EditorController
   /**
    * FE button to save
    *
-   * @param event
+   * @param event Save button event
    */
   public void saveBtn(ActionEvent event)
   {
     saveFile();
+  }
+
+  private void handleNoteButtons(KeyEvent ke)
+  {
+    switch (ke.getCode())
+    {
+      case A:
+        actualPress = new Press(Chord.RED, mediaPlayer.getCurrentTime().toMillis());
+        setFadeIn(circle0);
+        break;
+      case S:
+        actualPress = new Press(Chord.YELLOW, mediaPlayer.getCurrentTime().toMillis());
+        setFadeIn(circle1);
+        break;
+      case D:
+        actualPress = new Press(Chord.GREEN, mediaPlayer.getCurrentTime().toMillis());
+        setFadeIn(circle2);
+        break;
+      case K:
+        actualPress = new Press(Chord.BLUE, mediaPlayer.getCurrentTime().toMillis());
+        setFadeIn(circle3);
+        break;
+      case L:
+        actualPress = new Press(Chord.MAGENTA, mediaPlayer.getCurrentTime().toMillis());
+        setFadeIn(circle4);
+        break;
+    }
+
+    setNewPressToTextarea(actualPress);
+    saver.addPress(actualPress);
   }
 }
