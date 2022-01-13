@@ -7,6 +7,8 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ComboBox?>
 <BorderPane fx:id="rootContainer" prefHeight="585.0" prefWidth="610.0"
   xmlns="http://javafx.com/javafx/8.0.112"
   xmlns:fx="http://javafx.com/fxml/1" fx:controller="cz.jcu.prf.uai.javamugs.clonehero.gui.MenuController">
@@ -43,6 +45,7 @@
                 <Insets bottom="10.0" />
               </VBox.margin>
             </BorderPane>
+            <ComboBox fx:id="songs" prefWidth="200.0" />
             <Button fx:id="playButton" mnemonicParsing="false" onAction="#playButtonAction" prefWidth="200.0" text="Play">
               <VBox.margin>
                 <Insets bottom="10.0" />

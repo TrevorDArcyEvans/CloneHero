@@ -6,13 +6,11 @@ import cz.jcu.prf.uai.javamugs.clonehero.logic.PressChart;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
@@ -20,13 +18,20 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
+import java.net.URI;
+import java.util.Locale;
 
 public class MenuController
 {
   private Stage stage;
   private EditorController editorController;
   private GameController gameController;
+
+  @FXML
+  public ComboBox<String> songs;
+
   public Label difficultyLabel;
   public Slider speedSlider;
   public Slider difficultySlider;
@@ -39,8 +44,20 @@ public class MenuController
    */
   public void start()
   {
+    var userDir = new File(System.getProperty("user.dir"));
+    var repo = new File(userDir, "tracks");
+    var repoSongs = repo.list(new FilenameFilter()
+    {
+      @Override
+      public boolean accept(File dir, String name)
+      {
+        return name.toLowerCase(Locale.ROOT).endsWith(".mp3");
+      }
+    });
+    songs.getItems().setAll(repoSongs);
+    songs.getSelectionModel().selectFirst();
     rootContainer.setBackground(new Background(new BackgroundImage(new Image(getClass().getResource("/splash.jpg").toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null)));
-    fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+    fileChooser.setInitialDirectory(userDir);
     this.stage = (Stage) rootContainer.getScene().getWindow();
     stage.setOnCloseRequest(new EventHandler<WindowEvent>()
     {
@@ -59,6 +76,7 @@ public class MenuController
    */
   public void playButtonAction(ActionEvent event)
   {
+    var selSong = songs.getValue();
     fileChooser.setTitle("Select song");
     fileChooser.getExtensionFilters().clear();
     fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3", "*.mp3"));
