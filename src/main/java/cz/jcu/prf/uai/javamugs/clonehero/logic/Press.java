@@ -9,7 +9,7 @@ public class Press
    * Constructor, set color and drawTime
    *
    * @param color    color of chord
-   * @param drawTime time when chord will be draw
+   * @param drawTime time when chord will be drawn
    */
   public Press(int color, double drawTime)
   {

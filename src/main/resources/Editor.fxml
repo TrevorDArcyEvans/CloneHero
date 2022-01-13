@@ -16,64 +16,54 @@
     <BorderPane maxWidth="350.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
       <left>
         <StackPane BorderPane.alignment="CENTER">
-          <children>
-            <Circle fx:id="circle0" fill="#e00d0d" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label text="A">
-              <font>
-                <Font size="25.0" />
-              </font>
-            </Label>
-          </children>
+          <Circle fx:id="circle0" fill="#e00d0d" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+          <Label text="A">
+            <font>
+              <Font size="25.0" />
+            </font>
+          </Label>
         </StackPane>
       </left>
       <right>
         <StackPane BorderPane.alignment="CENTER">
-          <children>
-            <Circle fx:id="circle4" fill="#d811cb" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label text="L">
-              <font>
-                <Font size="25.0" />
-              </font>
-            </Label>
-          </children>
+          <Circle fx:id="circle4" fill="#d811cb" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+          <Label text="L">
+            <font>
+              <Font size="25.0" />
+            </font>
+          </Label>
         </StackPane>
       </right>
       <center>
         <BorderPane maxWidth="200.0" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
           <left>
             <StackPane BorderPane.alignment="CENTER">
-              <children>
-                <Circle fx:id="circle1" fill="YELLOW" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                <Label text="S">
-                  <font>
-                    <Font size="25.0" />
-                  </font>
-                </Label>
-              </children>
+              <Circle fx:id="circle1" fill="YELLOW" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+              <Label text="S">
+                <font>
+                  <Font size="25.0" />
+                </font>
+              </Label>
             </StackPane>
           </left>
           <center>
             <StackPane BorderPane.alignment="CENTER">
-              <children>
-                <Circle fx:id="circle2" fill="#20aa22" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                <Label text="D">
-                  <font>
-                    <Font size="25.0" />
-                  </font>
-                </Label>
-              </children>
+              <Circle fx:id="circle2" fill="#20aa22" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+              <Label text="D">
+                <font>
+                  <Font size="25.0" />
+                </font>
+              </Label>
             </StackPane>
           </center>
           <right>
             <StackPane BorderPane.alignment="CENTER">
-              <children>
-                <Circle fx:id="circle3" fill="#0083ff" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-                <Label text="K">
-                  <font>
-                    <Font size="25.0" />
-                  </font>
-                </Label>
-              </children>
+              <Circle fx:id="circle3" fill="#0083ff" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+              <Label text="K">
+                <font>
+                  <Font size="25.0" />
+                </font>
+              </Label>
             </StackPane>
           </right>
         </BorderPane>

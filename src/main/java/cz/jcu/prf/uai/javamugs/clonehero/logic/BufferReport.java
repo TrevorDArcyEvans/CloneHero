@@ -1,11 +1,9 @@
 package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
 /**
- * Created by ivank on 05.07.2017.
- */
-
-/**
  * Report of hits and misses and Chord of expected hits
+ *
+ * @author  ivank on 05.07.2017.
  */
 public class BufferReport
 {
