@@ -143,8 +143,8 @@ public class GameController
           {
             lights[i] = 120;
           }
-
         }
+
         if (!report.getChordToDraw().isEmpty())
         {
           boolean[] chordArr = report.getChordToDraw().getChords();
@@ -156,6 +156,7 @@ public class GameController
             }
           }
         }
+
         renderCanvas(report);
         pressedButtons = new Chord(false, false, false, false, false);
         if (mediaPlayer.getCurrentTime().toMillis() >= mediaPlayer.getTotalDuration().toMillis())
@@ -214,14 +215,16 @@ public class GameController
       }
       else if (highlightedStrings[i] < 0)
       {
-          gc.setStroke(Color.RED);
-          highlightedStrings[i]++;
+        gc.setStroke(Color.RED);
+        highlightedStrings[i]++;
       }
       else
       {
-          gc.setStroke(Color.LIGHTGREY);
+        gc.setStroke(Color.LIGHTGREY);
       }
+
       gc.strokeLine(x, 0, x, canvas.getHeight());
+
       //Circles
       gc.setFill(cz.jcu.prf.uai.javamugs.clonehero.gui.CloneHeroColors.COLORARRAY[i]);
       gc.setLineWidth(3);
@@ -273,6 +276,7 @@ public class GameController
           3);
       }
     }
+
     scoreLabel.setText(String.valueOf(report.getScore()));
     multiplierLabel.setText(String.format("%.1f", report.getMultiplier()) + "x");
     for (int i = 0; i < ballAnimations.size(); i++)
