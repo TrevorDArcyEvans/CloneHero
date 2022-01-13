@@ -25,10 +25,6 @@ import java.util.Locale;
 
 public class MenuController
 {
-  private Stage stage;
-  private EditorController editorController;
-  private GameController gameController;
-
   @FXML
   public ComboBox<String> songs;
 
@@ -36,8 +32,11 @@ public class MenuController
   public Slider speedSlider;
   public Slider difficultySlider;
   public Button exitButton;
-  public FileChooser fileChooser = new FileChooser();
   public BorderPane rootContainer;
+
+  private Stage stage;
+  private EditorController editorController;
+  private GameController gameController;
 
   /**
    * Method to be called on start, after initialization
@@ -46,18 +45,10 @@ public class MenuController
   {
     var userDir = new File(System.getProperty("user.dir"));
     var repo = new File(userDir, "tracks");
-    var repoSongs = repo.list(new FilenameFilter()
-    {
-      @Override
-      public boolean accept(File dir, String name)
-      {
-        return name.toLowerCase(Locale.ROOT).endsWith(".mp3");
-      }
-    });
+    var repoSongs = repo.list((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".mp3"));
     songs.getItems().setAll(repoSongs);
     songs.getSelectionModel().selectFirst();
     rootContainer.setBackground(new Background(new BackgroundImage(new Image(getClass().getResource("/splash.jpg").toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null)));
-    fileChooser.setInitialDirectory(userDir);
     this.stage = (Stage) rootContainer.getScene().getWindow();
     stage.setOnCloseRequest(new EventHandler<WindowEvent>()
     {
@@ -76,7 +67,9 @@ public class MenuController
    */
   public void playButtonAction(ActionEvent event)
   {
+    // TODO   remove FileChooser
     var selSong = songs.getValue();
+    FileChooser fileChooser = GetFileChooser();
     fileChooser.setTitle("Select song");
     fileChooser.getExtensionFilters().clear();
     fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3", "*.mp3"));
@@ -164,6 +157,7 @@ public class MenuController
       FXMLLoader loader = new FXMLLoader(getClass().getResource("/Editor.fxml"));
       Parent root = loader.load();
       editorController = (EditorController) loader.getController();
+      FileChooser fileChooser = GetFileChooser();
       fileChooser.setTitle("Select song");
       fileChooser.getExtensionFilters().clear();
       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3", "*.mp3"));
@@ -172,16 +166,15 @@ public class MenuController
       {
         return;
       }
+
       Stage editorStage = new Stage();
       editorStage.setTitle("Clone Hero Editor");
       editorStage.setScene(new Scene(root));
       editorStage.setResizable(false);
       editorStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));
       editorStage.show();
-      editorController.setSongPath(songFile.toURI().toString());
 
-      editorController.start();
-      //((Node)(event.getSource())).getScene().getWindow().hide();
+      editorController.start(songFile.toURI().toString());
     }
     catch (IOException e)
     {
@@ -197,6 +190,14 @@ public class MenuController
   public void exitButtonAction(ActionEvent event)
   {
     stage.close();
+  }
+
+  private static FileChooser GetFileChooser()
+  {
+    var userDir = new File(System.getProperty("user.dir"));
+    var fileChooser = new FileChooser();
+    fileChooser.setInitialDirectory(userDir);
+    return fileChooser;
   }
 }
 

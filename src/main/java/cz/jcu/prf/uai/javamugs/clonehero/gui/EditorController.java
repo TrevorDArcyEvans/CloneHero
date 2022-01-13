@@ -22,11 +22,6 @@ import java.io.File;
 
 public class EditorController
 {
-  private Press actualPress;
-  private Saver saver;
-  private MediaPlayer mediaPlayer;
-  private String songPath;
-  private boolean isRecording;
   public Label countLabel;
   public Circle circle0;
   public Circle circle1;
@@ -37,6 +32,12 @@ public class EditorController
   public Button saveBtn;
   public TextArea textPresses;
   public FileChooser fileChooser = new FileChooser();
+
+  private Press actualPress;
+  private Saver saver;
+  private MediaPlayer mediaPlayer;
+  private String songPath;
+  private boolean isRecording;
 
   /**
    * Round double to x decimals
@@ -105,7 +106,6 @@ public class EditorController
    */
   private void startListenButtons()
   {
-
     startBtn.getScene().setOnKeyPressed(new EventHandler<KeyEvent>()
     {
       public void handle(KeyEvent ke)
@@ -169,9 +169,12 @@ public class EditorController
 
   /**
    * Start view
+   *
+   * @param path
    */
-  public void start()
+  public void start(String path)
   {
+    this.songPath = path;
     saveBtn.setVisible(false);
 
     Stage stage = (Stage) startBtn.getScene().getWindow();
@@ -237,15 +240,5 @@ public class EditorController
   public void saveBtn(ActionEvent event)
   {
     saveFile();
-  }
-
-  /**
-   * Set song path
-   *
-   * @param path
-   */
-  public void setSongPath(String path)
-  {
-    this.songPath = path;
   }
 }
