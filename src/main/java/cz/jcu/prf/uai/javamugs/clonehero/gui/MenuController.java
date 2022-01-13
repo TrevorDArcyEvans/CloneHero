@@ -13,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
@@ -123,7 +122,6 @@ public class MenuController
       gameStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));
       gameStage.show();
       gameController.start();
-      //((Node)(event.getSource())).getScene().getWindow().hide();
     }
     catch (IOException e)
     {

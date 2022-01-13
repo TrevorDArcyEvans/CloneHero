@@ -15,10 +15,10 @@ public class PressChart
    */
   public PressChart(ArrayList<Press> presses)
   {
-      if (presses == null)
-      {
-          throw new InvalidParameterException();
-      }
+    if (presses == null)
+    {
+      throw new InvalidParameterException();
+    }
 
     int size = presses.size();
     this.presses = new Press[size];
@@ -44,11 +44,6 @@ public class PressChart
     int i = this.lastCalledItem;
     boolean[] arr = new boolean[5];
 
-      for (int y = 0; y < arr.length; y++)
-      {
-          arr[y] = false;
-      }
-
     if (presses.length <= this.lastCalledItem)
     {
       return new Chord(arr[Chord.RED], arr[Chord.YELLOW], arr[Chord.GREEN], arr[Chord.BLUE], arr[Chord.MAGENTA]);
@@ -69,7 +64,7 @@ public class PressChart
   /**
    * get Array of press chart
    *
-   * @return
+   * @return Array of press chart
    */
   public Press[] getPresses()
   {

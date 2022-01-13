@@ -5,7 +5,7 @@ package cz.jcu.prf.uai.javamugs.clonehero.logic;
  */
 
 /**
- * Report of hites and misses and Chord of expected hits
+ * Report of hits and misses and Chord of expected hits
  */
 public class BufferReport
 {
@@ -25,18 +25,18 @@ public class BufferReport
     this.hit = 0;
     for (int i = 0; i < hitChord.getChords().length; i++)
     {
-        if (hitChord.getChords()[i])
-        {
-            this.hit++;
-        }
+      if (hitChord.getChords()[i])
+      {
+        this.hit++;
+      }
     }
     this.miss = 0;
     for (int i = 0; i < missChord.getChords().length; i++)
     {
-        if (missChord.getChords()[i])
-        {
-            this.miss++;
-        }
+      if (missChord.getChords()[i])
+      {
+        this.miss++;
+      }
     }
     this.hitChord = hitChord;
     this.missChord = missChord;

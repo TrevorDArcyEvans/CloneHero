@@ -35,15 +35,15 @@ public class Saver
    */
   public void save(String path) throws IOException
   {
-      if (toSave.isEmpty())
-      {
-          throw new IOException("Nothing to save.");
-      }
+    if (toSave.isEmpty())
+    {
+      throw new IOException("Nothing to save.");
+    }
 
-      if (!path.endsWith(".prc"))
-      {
-          path += ".prc";
-      }
+    if (!path.endsWith(".prc"))
+    {
+      path += ".prc";
+    }
 
     try
     {
@@ -56,10 +56,10 @@ public class Saver
         toWrite = toSave.remove(0);
 
         time = (long) toWrite.getDrawTime();
-          if ((time - prevTime) < 50)
-          {
-              time = prevTime;
-          }
+        if ((time - prevTime) < 50)
+        {
+          time = prevTime;
+        }
 
         writer.println(time + ":" + toWrite.getColor());   //Draw time is actually
         // press time int this case.

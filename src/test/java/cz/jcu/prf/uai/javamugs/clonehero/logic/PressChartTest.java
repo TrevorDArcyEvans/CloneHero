@@ -1,7 +1,6 @@
 package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
 import junit.framework.TestCase;
-
 import java.util.ArrayList;
 
 /**

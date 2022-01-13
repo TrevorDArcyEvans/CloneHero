@@ -4,7 +4,6 @@ import cz.jcu.prf.uai.javamugs.clonehero.logic.Chord;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Press;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Saver;
 import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -15,7 +14,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
 import java.io.File;
 
 public class EditorController
@@ -196,9 +194,8 @@ public class EditorController
   /**
    * FE button to save
    *
-   * @param event Save button event
    */
-  public void saveBtn(ActionEvent event)
+  public void saveBtn()
   {
     saveFile();
   }

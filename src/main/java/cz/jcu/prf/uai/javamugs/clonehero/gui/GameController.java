@@ -8,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
-import javafx.scene.control.DialogEvent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -84,6 +83,7 @@ public class GameController
         mainCycle = null;
       }
     });
+
     //Key presses
     rootContainer.getScene().setOnKeyPressed(new EventHandler<KeyEvent>()
     {
@@ -180,14 +180,7 @@ public class GameController
     alert.setTitle("Clone Hero");
     alert.setHeaderText("You've completed this song!");
     alert.setContentText("Your score: " + lastReport.getScore());
-    alert.setOnCloseRequest(new EventHandler<DialogEvent>()
-    {
-      @Override
-      public void handle(DialogEvent event)
-      {
-        stage.hide();
-      }
-    });
+    alert.setOnCloseRequest(event -> stage.hide());
     alert.show();
   }
 

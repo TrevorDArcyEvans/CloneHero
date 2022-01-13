@@ -1,7 +1,6 @@
 package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
 import java.util.ArrayList;
-
 import junit.framework.TestCase;
 
 /**
@@ -11,7 +10,6 @@ import junit.framework.TestCase;
  */
 public class GameTest extends TestCase
 {
-
   private static final double TIME_OFFSET = 1000.0;
   private static final byte DIFFICULTY = 2;
 

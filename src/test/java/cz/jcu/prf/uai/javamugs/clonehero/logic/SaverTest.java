@@ -28,7 +28,6 @@ public class SaverTest extends TestCase
 
   public void testSave() throws Exception
   {
-
     Parser parser = new Parser();
     PressChart chart = parser.parseFile(TEST_FILE_LOAD_PATH, TEST_FILE_LOAD_TIME_OFFSET);
 
@@ -61,13 +60,12 @@ public class SaverTest extends TestCase
   /**
    * Compares if two PressCharts have the same content.
    *
-   * @param a
-   * @param b
+   * @param a 1st PressChart
+   * @param b 2nd PressChart
    * @return true if press colors and times match in provided PressCharts
    */
   private boolean comparePressCharts(PressChart a, PressChart b)
   {
-
     Press[] aPresses = a.getPresses();
     Press[] bPresses = b.getPresses();
 

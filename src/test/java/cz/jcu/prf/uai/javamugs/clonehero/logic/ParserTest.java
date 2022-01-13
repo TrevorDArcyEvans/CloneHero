@@ -29,10 +29,10 @@ public class ParserTest extends TestCase
     }
     catch (IOException e)
     {
-        if (!e.getMessage().equals("Unexpected extension"))
-        {
-            fail();
-        }
+      if (!e.getMessage().equals("Unexpected extension"))
+      {
+        fail();
+      }
     }
 
     try
@@ -42,10 +42,10 @@ public class ParserTest extends TestCase
     }
     catch (IOException e)
     {
-        if (!e.getMessage().equals("File is too large"))
-        {
-            fail();
-        }
+      if (!e.getMessage().equals("File is too large"))
+      {
+        fail();
+      }
     }
 
     //TODO test unauthorized access attempt
@@ -60,10 +60,10 @@ public class ParserTest extends TestCase
     }
     catch (IOException e)
     {
-        if (!e.getMessage().startsWith("Unexpected file format "))
-        {
-            fail();
-        }
+      if (!e.getMessage().startsWith("Unexpected file format "))
+      {
+        fail();
+      }
     }
   }
 }
