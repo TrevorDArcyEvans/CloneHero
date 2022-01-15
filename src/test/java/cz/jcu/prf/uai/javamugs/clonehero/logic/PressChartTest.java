@@ -10,7 +10,7 @@ public class PressChartTest extends TestCase
 {
   public void testNext() throws Exception
   {
-    ArrayList<Press> arrList = new ArrayList<Press>();
+    ArrayList<Press> arrList = new ArrayList<>();
     arrList.add(new Press(Chord.RED, 10.0));
     arrList.add(new Press(Chord.YELLOW, 12.0));
     arrList.add(new Press(Chord.MAGENTA, 13.0));

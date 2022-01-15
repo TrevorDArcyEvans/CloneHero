@@ -7,15 +7,15 @@ import junit.framework.TestCase;
  */
 public class PressTest extends TestCase
 {
-  public void testGetColor() throws Exception
+  public void testGetColor()
   {
-    Press press = new Press(Chord.MAGENTA, 500.0);
+    var press = new Press(Chord.MAGENTA, 500.0);
     assertEquals(Chord.MAGENTA, press.getColor());
   }
 
-  public void testGetDrawTime() throws Exception
+  public void testGetDrawTime()
   {
-    Press press = new Press(Chord.MAGENTA, 500.0);
+    var press = new Press(Chord.MAGENTA, 500.0);
     assertEquals(500.0, press.getDrawTime());
   }
 }

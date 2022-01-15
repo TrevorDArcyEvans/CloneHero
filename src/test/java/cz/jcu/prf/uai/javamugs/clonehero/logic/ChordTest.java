@@ -9,9 +9,9 @@ public class ChordTest extends TestCase
 {
   public void testGetChords() throws Exception
   {
-    Chord chord = new Chord(false, true, false, false, true);
+    var chord = new Chord(false, true, false, false, true);
 
-    boolean[] arr = chord.getChords();
+    var arr = chord.getChords();
 
     assertFalse(arr[Chord.RED]);
     assertTrue(arr[Chord.YELLOW]);

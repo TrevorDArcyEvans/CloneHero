@@ -9,11 +9,16 @@ import junit.framework.TestCase;
  */
 public class ScoreTest extends TestCase
 {
-  public void testScoreContainer()
+  public void test_constructor_resets()
   {
-    Score score = new Score();
+    var score = new Score();
     assertEquals(0, score.getScore());
     assertEquals(1.0, score.getMultiplier());
+  }
+
+  public void testScoreContainer()
+  {
+    var score = new Score();
 
     score.addScore(500);
     assertEquals(500, score.getScore());

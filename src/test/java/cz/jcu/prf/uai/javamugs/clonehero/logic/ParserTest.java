@@ -16,7 +16,7 @@ public class ParserTest extends TestCase
     assertNotNull(chart);
   }
 
-  public void testParseFile_MISSING_EXTENSION_PATH() throws Exception
+  public void testParseFile_MISSING_EXTENSION_PATH()
   {
     final String MISSING_EXTENSION_PATH = TEST_CHARTS_PATH + "MissingExtension";
     try
@@ -34,7 +34,7 @@ public class ParserTest extends TestCase
     }
   }
 
-  public void testParseFile_TOO_LARGE_FILE_PATH() throws Exception
+  public void testParseFile_TOO_LARGE_FILE_PATH()
   {
     final String TOO_LARGE_FILE_PATH = TEST_CHARTS_PATH + "TooLarge.prc";
     try
@@ -60,7 +60,7 @@ public class ParserTest extends TestCase
     assertTrue(chart.next(50000).isEmpty());
   }
 
-  public void testParseFile_UNEXPECTED_FORMAT_PATH() throws Exception
+  public void testParseFile_UNEXPECTED_FORMAT_PATH()
   {
     final String UNEXPECTED_FORMAT_PATH = TEST_CHARTS_PATH + "WrongFormat.prc";
     try

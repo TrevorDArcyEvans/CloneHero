@@ -28,17 +28,16 @@ public class SaverTest extends TestCase
 
   public void testSave() throws Exception
   {
-    Parser parser = new Parser();
-    PressChart chart = parser.parseFile(TEST_FILE_LOAD_PATH, TEST_FILE_LOAD_TIME_OFFSET);
+    var parser = new Parser();
+    var chart = parser.parseFile(TEST_FILE_LOAD_PATH, TEST_FILE_LOAD_TIME_OFFSET);
 
-    Saver saver = new Saver();
+    var saver = new Saver();
 
     double time = TEST_FILE_SAVE_TIME_OFFSET;
-    boolean[] chord;
 
     while (time < TEST_FILE_END_TIME)
     {
-      chord = chart.next(time).getChords();
+      var chord = chart.next(time).getChords();
       for (int i = 0; i < chord.length; i++)
       {
         if (chord[i])
@@ -51,8 +50,8 @@ public class SaverTest extends TestCase
 
     saver.save(TEST_FILE_SAVE_PATH);
 
-    PressChart originalChart = parser.parseFile(TEST_FILE_LOAD_PATH, TEST_FILE_LOAD_TIME_OFFSET);
-    PressChart newChart = parser.parseFile(TEST_FILE_SAVE_PATH, TEST_FILE_SAVE_TIME_OFFSET);
+    var originalChart = parser.parseFile(TEST_FILE_LOAD_PATH, TEST_FILE_LOAD_TIME_OFFSET);
+    var newChart = parser.parseFile(TEST_FILE_SAVE_PATH, TEST_FILE_SAVE_TIME_OFFSET);
     assertNotNull(newChart);
     assertTrue(comparePressCharts(originalChart, newChart));
   }
@@ -66,8 +65,8 @@ public class SaverTest extends TestCase
    */
   private boolean comparePressCharts(PressChart a, PressChart b)
   {
-    Press[] aPresses = a.getPresses();
-    Press[] bPresses = b.getPresses();
+    var aPresses = a.getPresses();
+    var bPresses = b.getPresses();
 
       if (aPresses == null || bPresses == null || aPresses.length != bPresses.length)
       {

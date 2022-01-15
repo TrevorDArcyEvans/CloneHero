@@ -21,21 +21,23 @@ public class BufferReport
   public BufferReport(Chord hitChord, Chord missChord)
   {
     this.hit = 0;
-    for (int i = 0; i < hitChord.getChords().length; i++)
+    for (var i = 0; i < hitChord.getChords().length; i++)
     {
       if (hitChord.getChords()[i])
       {
         this.hit++;
       }
     }
+
     this.miss = 0;
-    for (int i = 0; i < missChord.getChords().length; i++)
+    for (var i = 0; i < missChord.getChords().length; i++)
     {
       if (missChord.getChords()[i])
       {
         this.miss++;
       }
     }
+
     this.hitChord = hitChord;
     this.missChord = missChord;
   }

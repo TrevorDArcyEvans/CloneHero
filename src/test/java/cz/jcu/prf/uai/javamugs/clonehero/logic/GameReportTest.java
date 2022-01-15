@@ -11,13 +11,13 @@ public class GameReportTest extends TestCase
 {
   public void testGameReportContainer()
   {
-    Score score = new Score();
+    var score = new Score();
     score.addMultiplier(1.0);
     score.addScore(200);
-    Chord chordToDraw = new Chord(true, false, true, false, true);
-    Chord chordHit = new Chord(false, true, false, true, false);
-    Chord chordMiss = new Chord(false, true, true, true, false);
-    GameReport report = new GameReport(score, chordToDraw, chordHit, chordMiss);
+    var chordToDraw = new Chord(true, false, true, false, true);
+    var chordHit = new Chord(false, true, false, true, false);
+    var chordMiss = new Chord(false, true, true, true, false);
+    var report = new GameReport(score, chordToDraw, chordHit, chordMiss);
     assertNotNull(report);
     assertEquals(chordToDraw.getChords(), report.getChordToDraw().getChords());
     assertEquals(chordHit.getChords(), report.getHitChord().getChords());
