@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -45,7 +46,10 @@ public class MenuController
     var repoSongs = repo.list((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".mp3"));
     songs.getItems().setAll(repoSongs);
     songs.getSelectionModel().selectFirst();
-    rootContainer.setBackground(new Background(new BackgroundImage(new Image(getClass().getResource("/splash.jpg").toString()), BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null)));
+    var image = new Image(getClass().getResource("/splash.jpg").toString());
+    var backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null);
+    var background = new Background(backgroundImage);
+    rootContainer.setBackground(background);
     this.stage = (Stage) rootContainer.getScene().getWindow();
     stage.setOnCloseRequest(we -> System.exit(0));
     difficultyLabel.textProperty().bind(Bindings.format("%.0f", difficultySlider.valueProperty()));
@@ -53,22 +57,21 @@ public class MenuController
 
   /**
    * Method to be called on play button click
-   *
    */
   public void playButtonAction()
   {
     var userDir = new File(System.getProperty("user.dir"));
-    var tracksURI = new File(userDir,Tracks);
+    var tracksURI = new File(userDir, Tracks);
     var songFile = new File(tracksURI, songs.getValue());
     var songURI = songFile.toURI();
     var pressChartPath = songFile.getAbsolutePath().replace(".mp3", ".prc");
     var parser = new Parser();
     var timeOffset = (int) speedSlider.getValue();
+    var difficulty = (int) difficultySlider.getValue();
 
     try
     {
       var pressChart = parser.parseFile(pressChartPath, timeOffset);
-      var difficulty = (int) difficultySlider.getValue();
       var game = new Game(timeOffset, difficulty, pressChart);
 
       openGameWindow(game, songURI); //TODO put method under logic
@@ -86,7 +89,7 @@ public class MenuController
   /**
    * Creates Game window
    *
-   * @param game          game core
+   * @param game    game core
    * @param songURI path to the song
    */
   private void openGameWindow(Game game, URI songURI)
@@ -114,7 +117,6 @@ public class MenuController
 
   /**
    * Method to be called on editor button click
-   *
    */
   public void editorButtonAction()
   {
@@ -150,7 +152,6 @@ public class MenuController
 
   /**
    * Method to be called on exit button click
-   *
    */
   public void exitButtonAction()
   {
