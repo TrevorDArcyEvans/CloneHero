@@ -4,9 +4,7 @@ import cz.jcu.prf.uai.javamugs.clonehero.logic.Chord;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Game;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.GameReport;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -19,6 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Random;
@@ -59,30 +58,7 @@ public class GameController
   {
     this.stage = (Stage) rootContainer.getScene().getWindow();
     background = new Image(getClass().getResource("/bg.jpg").toString());
-    stage.setOnCloseRequest(new EventHandler<WindowEvent>()
-    {
-      public void handle(WindowEvent we)
-      {
-        try
-        {
-          mediaPlayer.stop();
-        }
-        catch (NullPointerException ex)
-        {
-          ex.printStackTrace();
-        }
-        mediaPlayer = null;
-        try
-        {
-          mainCycle.stop();
-        }
-        catch (NullPointerException ex)
-        {
-          ex.printStackTrace();
-        }
-        mainCycle = null;
-      }
-    });
+    stage.setOnCloseRequest(this::handleOnCloseRequest);
 
     //Key presses
     rootContainer.getScene().setOnKeyPressed(this::handleOnKeyPressed);
@@ -100,8 +76,8 @@ public class GameController
       @Override
       public void handle(long currentNanoTime)
       {
-        GameReport report = game.tick(mediaPlayer.getCurrentTime().toMillis(), pressedButtons);
-        for (int i = 0; i < highlightedStrings.length; i++)
+        var report = game.tick(mediaPlayer.getCurrentTime().toMillis(), pressedButtons);
+        for (var i = 0; i < highlightedStrings.length; i++)
         {
           if (report.getHitChord().getChords()[i])
           {
@@ -152,7 +128,7 @@ public class GameController
    */
   private void end(GameReport lastReport)
   {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    var alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("Clone Hero");
     alert.setHeaderText("You've completed this song!");
     alert.setContentText("Your score: " + lastReport.getScore());
@@ -167,7 +143,7 @@ public class GameController
    */
   private void renderCanvas(GameReport report)
   {
-    GraphicsContext gc = canvas.getGraphicsContext2D();
+    var gc = canvas.getGraphicsContext2D();
     gc.drawImage(background, 0, 0);
     for (int i = 0; i < highlightedStrings.length; i++)
     {
@@ -205,7 +181,7 @@ public class GameController
       gc.setFill(gc.getStroke());
       gc.setFont(Font.font(30));
       gc.setTextAlign(TextAlignment.CENTER);
-      String text = "";
+      var text = "";
       switch (i)
       {
         case 0:
@@ -229,19 +205,21 @@ public class GameController
       if (lights[i] > 0)
       {
         lights[i]--;
-        Color color = cz.jcu.prf.uai.javamugs.clonehero.gui.CloneHeroColors.COLORARRAY[i];
+        var color = cz.jcu.prf.uai.javamugs.clonehero.gui.CloneHeroColors.COLORARRAY[i];
         gc.setFill(new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.2));
         gc.fillPolygon(
-          new double[]{
-            i * (canvas.getWidth() / (lights.length - 1)),
-            0,
-            canvas.getWidth()
-          },
-          new double[]{
-            -50,
-            canvas.getHeight() + 1500,
-            canvas.getHeight() + 1500
-          },
+          new double[]
+            {
+              i * (canvas.getWidth() / (lights.length - 1)),
+              0,
+              canvas.getWidth()
+            },
+          new double[]
+            {
+              -50,
+              canvas.getHeight() + 1500,
+              canvas.getHeight() + 1500
+            },
           3);
       }
     }
@@ -284,6 +262,28 @@ public class GameController
     }
   }
 
+  private void handleOnCloseRequest(WindowEvent we)
+  {
+    try
+    {
+      mediaPlayer.stop();
+    }
+    catch (NullPointerException ex)
+    {
+      ex.printStackTrace();
+    }
+    mediaPlayer = null;
+    try
+    {
+      mainCycle.stop();
+    }
+    catch (NullPointerException ex)
+    {
+      ex.printStackTrace();
+    }
+    mainCycle = null;
+  }
+
   private class BallAnimation
   {
     private final int color;
@@ -313,9 +313,9 @@ public class GameController
      */
     public void animate(double currentTime)
     {
-      double ratio = (currentTime - startTime) / (endTime - startTime);
+      var ratio = (currentTime - startTime) / (endTime - startTime);
       this.y = (canvas.getHeight() - 25) * ratio - 50;
-      GraphicsContext gc = canvas.getGraphicsContext2D();
+      var gc = canvas.getGraphicsContext2D();
       gc.setFill(cz.jcu.prf.uai.javamugs.clonehero.gui.CloneHeroColors.COLORARRAY[color]);
       gc.fillOval(225 + 75 * color, y, 50, 50);
       if (currentTime >= endTime + 500)

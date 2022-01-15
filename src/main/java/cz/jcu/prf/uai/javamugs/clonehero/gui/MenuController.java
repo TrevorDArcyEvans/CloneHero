@@ -75,7 +75,7 @@ public class MenuController
     }
     catch (IOException ex)
     {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
+      var alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("Clone Hero");
       alert.setHeaderText("Error while parsing the file!");
       alert.setContentText(ex.getMessage());
@@ -93,12 +93,12 @@ public class MenuController
   {
     try
     {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game.fxml"));
+      var loader = new FXMLLoader(getClass().getResource("/Game.fxml"));
       Parent root = loader.load();
       GameController gameController = loader.getController();
       gameController.setGame(game);
       gameController.setSongURI(songURI);
-      Stage gameStage = new Stage();
+      var gameStage = new Stage();
       gameStage.setTitle("Clone Hero");
       gameStage.setScene(new Scene(root));
       gameStage.setResizable(false);
@@ -120,10 +120,10 @@ public class MenuController
   {
     try
     {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/Editor.fxml"));
+      var loader = new FXMLLoader(getClass().getResource("/Editor.fxml"));
       Parent root = loader.load();
       EditorController editorController = loader.getController();
-      FileChooser fileChooser = GetFileChooser();
+      var fileChooser = GetFileChooser();
       fileChooser.setTitle("Select song");
       fileChooser.getExtensionFilters().clear();
       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3", "*.mp3"));
@@ -133,7 +133,7 @@ public class MenuController
         return;
       }
 
-      Stage editorStage = new Stage();
+      var editorStage = new Stage();
       editorStage.setTitle("Clone Hero Editor");
       editorStage.setScene(new Scene(root));
       editorStage.setResizable(false);

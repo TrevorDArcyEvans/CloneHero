@@ -14,7 +14,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import java.io.File;
 
 public class EditorController
 {
@@ -58,7 +57,7 @@ public class EditorController
    */
   private void setNewPressToTextarea(Press press)
   {
-    String colorName = "";
+    var colorName = "";
 
     switch (press.getColor())
     {
@@ -89,7 +88,7 @@ public class EditorController
    */
   private void setFadeIn(Circle c)
   {
-    FadeTransition ft = new FadeTransition(Duration.millis(300), c);
+    var ft = new FadeTransition(Duration.millis(300), c);
     ft.setFromValue(0.3);
     ft.setToValue(1);
     ft.setCycleCount(1);
@@ -115,13 +114,13 @@ public class EditorController
       fileChooser.setTitle("Select PressChart file");
       fileChooser.getExtensionFilters().clear();
       fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PressChart file", "*.prc"));
-      File pressChartFile = fileChooser.showSaveDialog(startBtn.getScene().getWindow());
+      var pressChartFile = fileChooser.showSaveDialog(startBtn.getScene().getWindow());
       if (pressChartFile == null)
       {
         return;
       }
 
-      String pressChartPath = pressChartFile.getAbsolutePath();
+      var pressChartPath = pressChartFile.getAbsolutePath();
       saver.save(pressChartPath);
     }
     catch (Exception e)
@@ -140,7 +139,7 @@ public class EditorController
     this.songPath = path;
     saveBtn.setVisible(false);
 
-    Stage stage = (Stage) startBtn.getScene().getWindow();
+    var stage = (Stage) startBtn.getScene().getWindow();
     stage.setOnCloseRequest(we ->
     {
       try
@@ -172,7 +171,7 @@ public class EditorController
       saveBtn.setVisible(false);
       saver = new Saver();
 
-      Media sound = new Media(this.songPath);
+      var sound = new Media(this.songPath);
       mediaPlayer = new MediaPlayer(sound);
       mediaPlayer.play();
       textPresses.setText("");

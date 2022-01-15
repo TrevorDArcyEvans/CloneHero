@@ -21,7 +21,7 @@ public class App extends Application
   {
     try
     {
-      FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("Menu.fxml"));
+      var loader = new FXMLLoader(getClass().getClassLoader().getResource("Menu.fxml"));
       Parent root = loader.load();
       MenuController controller = loader.getController();
       primaryStage.setTitle("Clone Hero");
