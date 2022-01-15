@@ -32,7 +32,7 @@ $ mvn package
 ![uml](CloneHero.png)
 
 ## Command Line Options
-`sereencap`
+`screencap`
 * capture each frame
 * _image001.png_ to _imageXXX.png_ in current working directory
 * existing images will be overwritten
