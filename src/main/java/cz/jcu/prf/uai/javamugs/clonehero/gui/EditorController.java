@@ -36,22 +36,6 @@ public class EditorController
   private boolean isRecording;
 
   /**
-   * Round double to x decimals
-   */
-  private double round(double value, int places)
-  {
-    if (places < 0)
-    {
-      throw new IllegalArgumentException();
-    }
-
-    long factor = (long) Math.pow(10, places);
-    value = value * factor;
-    long tmp = Math.round(value);
-    return (double) tmp / factor;
-  }
-
-  /**
    * Throw actual press to textarea
    *
    * @param press key press
@@ -79,7 +63,7 @@ public class EditorController
         break;
     }
 
-    textPresses.setText(colorName + "\t= " + round(press.getDrawTime(), 4) + "\n" + textPresses.getText());
+    textPresses.setText(colorName + "\t= " + String.format ("%.4f", press.getDrawTime()) + "\n" + textPresses.getText());
   }
 
   /**
