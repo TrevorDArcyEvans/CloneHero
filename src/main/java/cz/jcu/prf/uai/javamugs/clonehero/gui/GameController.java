@@ -71,7 +71,13 @@ public class GameController
     pressedButtons = new Chord(false, false, false, false, false);
 
     ballAnimations = new ArrayList<>();
-    mainCycle = new AnimationTimer() // 60 FPS
+    this.mainCycle = getAnimationTimer();
+    this.mainCycle.start();
+  }
+
+  private AnimationTimer getAnimationTimer()
+  {
+    var animTimer = new AnimationTimer() // 60 FPS
     {
       @Override
       public void handle(long currentNanoTime)
@@ -118,7 +124,7 @@ public class GameController
         }
       }
     };
-    mainCycle.start();
+    return animTimer;
   }
 
   /**
