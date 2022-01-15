@@ -15,10 +15,16 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.util.Locale;
 
 public class MenuController
 {
+  private static final String Tracks = "tracks";
+
+  /**
+   * List of songs in 'tracks' directory inc .mp3 extension
+   */
   @FXML
   public ComboBox<String> songs;
 
@@ -36,7 +42,7 @@ public class MenuController
   public void start()
   {
     var userDir = new File(System.getProperty("user.dir"));
-    var repo = new File(userDir, "tracks");
+    var repo = new File(userDir, Tracks);
     var repoSongs = repo.list((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".mp3"));
     songs.getItems().setAll(repoSongs);
     songs.getSelectionModel().selectFirst();
@@ -52,31 +58,13 @@ public class MenuController
    */
   public void playButtonAction()
   {
-    // TODO   remove FileChooser
-    var selSong = songs.getValue();
-    FileChooser fileChooser = GetFileChooser();
-    fileChooser.setTitle("Select song");
-    fileChooser.getExtensionFilters().clear();
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3", "*.mp3"));
-    File songFile = fileChooser.showOpenDialog(stage);
-    if (songFile == null)
-    {
-      return;
-    }
-    String songURIstring = songFile.toURI().toString();
-
-    fileChooser.setTitle("Select PressChart file");
-    fileChooser.getExtensionFilters().clear();
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PressChart file", "*.prc"));
-    File pressChartFile = fileChooser.showOpenDialog(stage);
-    if (pressChartFile == null)
-    {
-      return;
-    }
-    String pressChartPath = pressChartFile.getAbsolutePath();
-
-    Parser parser = new Parser();
-    int timeOffset = (int) speedSlider.getValue();
+    var userDir = new File(System.getProperty("user.dir"));
+    var tracksURI = new File(userDir,Tracks);
+    var songFile = new File(tracksURI, songs.getValue());
+    var songURI = songFile.toURI();
+    var pressChartPath = songFile.getAbsolutePath().replace(".mp3", ".prc");
+    var parser = new Parser();
+    var timeOffset = (int) speedSlider.getValue();
 
     PressChart pressChart;
     try
@@ -93,20 +81,19 @@ public class MenuController
       return;
     }
 
-    int difficulty = (int) difficultySlider.getValue();
+    var difficulty = (int) difficultySlider.getValue();
+    var game = new Game(timeOffset, difficulty, pressChart);
 
-    Game game = new Game(timeOffset, (byte) difficulty, pressChart);
-
-    openGameWindow(game, songURIstring); //TODO put method under logic
+    openGameWindow(game, songURI); //TODO put method under logic
   }
 
   /**
    * Creates Game window
    *
    * @param game          game core
-   * @param songURIstring path to the song
+   * @param songURI path to the song
    */
-  private void openGameWindow(Game game, String songURIstring)
+  private void openGameWindow(Game game, URI songURI)
   {
     try
     {
@@ -114,7 +101,7 @@ public class MenuController
       Parent root = loader.load();
       GameController gameController = loader.getController();
       gameController.setGame(game);
-      gameController.setSongURIstring(songURIstring);
+      gameController.setSongURI(songURI);
       Stage gameStage = new Stage();
       gameStage.setTitle("Clone Hero");
       gameStage.setScene(new Scene(root));

@@ -15,7 +15,7 @@ public class Buffer
    *
    * @param difficulty 1-3 - tolerance of hits and misses
    */
-  public Buffer(byte difficulty)
+  public Buffer(int difficulty)
   {
     bufferRecords = new ArrayList<BufferRecord>();
     switch (difficulty)
@@ -66,17 +66,20 @@ public class Buffer
         expectedBufferRecords.add(bufferRecord);
       }
     }
+
     Chord hitChord = new Chord(false, false, false, false, false);
     Chord missChord = new Chord(false, false, false, false, false);
     if (expectedBufferRecords.isEmpty())
     {
       System.arraycopy(pressedKeys.getChords(), 0, missChord.getChords(), 0, missChord.getChords().length);
     }
+
     for (BufferRecord expectedBufferRecord : expectedBufferRecords)
     {
       expectedBufferRecord.checkUnexpectedPresses(pressedKeys, missChord);
       expectedBufferRecord.checkHits(pressedKeys, hitChord);
     }
+
     // check empty expected chords and chord out of time
     for (int i = 0; i < bufferRecords.size(); i++)
     {
@@ -116,7 +119,7 @@ public class Buffer
     return bufferRecords.size();
   }
 
-  private class BufferRecord
+  private static class BufferRecord
   {
     private final Chord chord;
     private final double time;

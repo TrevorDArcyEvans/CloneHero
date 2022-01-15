@@ -19,7 +19,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -34,7 +34,7 @@ public class GameController
   private Game game;
   private MediaPlayer mediaPlayer;
   private Chord pressedButtons;
-  private String songURIstring;
+  private URI songURI;
   private ArrayList<BallAnimation> ballAnimations;
   private AnimationTimer mainCycle;
   private final int[] highlightedStrings = new int[5];
@@ -47,9 +47,9 @@ public class GameController
     this.game = game;
   }
 
-  public void setSongURIstring(String songURIstring)
+  public void setSongURI(URI songURI)
   {
-    this.songURIstring = songURIstring;
+    this.songURI = songURI;
   }
 
   /**
@@ -111,7 +111,7 @@ public class GameController
       }
     });
 
-    Media sound = new Media(songURIstring);
+    var sound = new Media(songURI.toString());
     mediaPlayer = new MediaPlayer(sound);
     mediaPlayer.play();
 

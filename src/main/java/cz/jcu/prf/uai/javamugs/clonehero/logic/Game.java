@@ -25,7 +25,7 @@ public class Game
    * @param difficulty game difficulty.
    * @param pressChart loaded press chart. Never null.
    */
-  public Game(double timeOffset, byte difficulty, PressChart pressChart)
+  public Game(double timeOffset, int difficulty, PressChart pressChart)
   {
     this.timeOffset = timeOffset;
     this.pressChart = pressChart;
