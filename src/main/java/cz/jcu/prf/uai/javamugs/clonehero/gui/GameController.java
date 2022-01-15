@@ -85,31 +85,7 @@ public class GameController
     });
 
     //Key presses
-    rootContainer.getScene().setOnKeyPressed(new EventHandler<KeyEvent>()
-    {
-      @Override
-      public void handle(KeyEvent event)
-      {
-        switch (event.getCode())
-        {
-          case A:
-            pressedButtons.getChords()[0] = true;
-            break;
-          case S:
-            pressedButtons.getChords()[1] = true;
-            break;
-          case D:
-            pressedButtons.getChords()[2] = true;
-            break;
-          case K:
-            pressedButtons.getChords()[3] = true;
-            break;
-          case L:
-            pressedButtons.getChords()[4] = true;
-            break;
-        }
-      }
-    });
+    rootContainer.getScene().setOnKeyPressed(this::handleOnKeyPressed);
 
     var sound = new Media(songURI.toString());
     mediaPlayer = new MediaPlayer(sound);
@@ -118,7 +94,7 @@ public class GameController
     //final long startNanoTime = System.nanoTime();
     pressedButtons = new Chord(false, false, false, false, false);
 
-    ballAnimations = new ArrayList<BallAnimation>();
+    ballAnimations = new ArrayList<>();
     mainCycle = new AnimationTimer() // 60 FPS
     {
       @Override
@@ -283,6 +259,28 @@ public class GameController
       {
         ballAnimations.get(i).animate(mediaPlayer.getCurrentTime().toMillis());
       }
+    }
+  }
+
+  private void handleOnKeyPressed(KeyEvent event)
+  {
+    switch (event.getCode())
+    {
+      case A:
+        pressedButtons.getChords()[0] = true;
+        break;
+      case S:
+        pressedButtons.getChords()[1] = true;
+        break;
+      case D:
+        pressedButtons.getChords()[2] = true;
+        break;
+      case K:
+        pressedButtons.getChords()[3] = true;
+        break;
+      case L:
+        pressedButtons.getChords()[4] = true;
+        break;
     }
   }
 

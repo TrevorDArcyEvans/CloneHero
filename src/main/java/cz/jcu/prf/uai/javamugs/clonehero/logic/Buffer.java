@@ -17,7 +17,7 @@ public class Buffer
    */
   public Buffer(int difficulty)
   {
-    bufferRecords = new ArrayList<BufferRecord>();
+    bufferRecords = new ArrayList<>();
     switch (difficulty)
     {
       case 1:
@@ -57,7 +57,7 @@ public class Buffer
   {
     double minTime = pressTime - tolerance;
     double maxTime = pressTime + tolerance;
-    ArrayList<BufferRecord> expectedBufferRecords = new ArrayList<BufferRecord>();
+    ArrayList<BufferRecord> expectedBufferRecords = new ArrayList<>();
     for (BufferRecord bufferRecord : bufferRecords)
     { // get expected chords
       double time = bufferRecord.getTime();

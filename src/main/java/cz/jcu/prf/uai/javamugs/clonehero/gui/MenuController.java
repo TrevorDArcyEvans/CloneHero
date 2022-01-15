@@ -2,7 +2,6 @@ package cz.jcu.prf.uai.javamugs.clonehero.gui;
 
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Game;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Parser;
-import cz.jcu.prf.uai.javamugs.clonehero.logic.PressChart;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,10 +65,13 @@ public class MenuController
     var parser = new Parser();
     var timeOffset = (int) speedSlider.getValue();
 
-    PressChart pressChart;
     try
     {
-      pressChart = parser.parseFile(pressChartPath, timeOffset);
+      var pressChart = parser.parseFile(pressChartPath, timeOffset);
+      var difficulty = (int) difficultySlider.getValue();
+      var game = new Game(timeOffset, difficulty, pressChart);
+
+      openGameWindow(game, songURI); //TODO put method under logic
     }
     catch (IOException ex)
     {
@@ -78,13 +80,7 @@ public class MenuController
       alert.setHeaderText("Error while parsing the file!");
       alert.setContentText(ex.getMessage());
       alert.show();
-      return;
     }
-
-    var difficulty = (int) difficultySlider.getValue();
-    var game = new Game(timeOffset, difficulty, pressChart);
-
-    openGameWindow(game, songURI); //TODO put method under logic
   }
 
   /**
