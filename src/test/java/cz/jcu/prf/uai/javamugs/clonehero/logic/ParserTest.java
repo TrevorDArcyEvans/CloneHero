@@ -1,7 +1,6 @@
 package cz.jcu.prf.uai.javamugs.clonehero.logic;
 
 import junit.framework.TestCase;
-
 import java.io.IOException;
 
 public class ParserTest extends TestCase
@@ -48,8 +47,6 @@ public class ParserTest extends TestCase
       }
     }
 
-    //TODO test unauthorized access attempt
-
     chart = parser.parseFile(DROPPING_EARLY_PRESSES_PATH, TIME_OFFSET);
     assertTrue(chart.next(50000).isEmpty());
 
@@ -58,9 +55,9 @@ public class ParserTest extends TestCase
       parser.parseFile(UNEXPECTED_FORMAT_PATH, TIME_OFFSET);
       fail();
     }
-    catch (IOException e)
+    catch (Exception e)
     {
-      if (!e.getMessage().startsWith("Unexpected file format "))
+      if (!(e instanceof NumberFormatException))
       {
         fail();
       }
