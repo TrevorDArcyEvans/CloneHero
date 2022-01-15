@@ -28,7 +28,6 @@ public class EditorController
   public Button startBtn;
   public Button saveBtn;
   public TextArea textPresses;
-  public FileChooser fileChooser = new FileChooser();
 
   private Press actualPress;
   private Saver saver;
@@ -111,6 +110,7 @@ public class EditorController
    */
   private void saveFile() throws IOException
   {
+    var fileChooser = new FileChooser();
     fileChooser.setTitle("Select PressChart file");
     fileChooser.getExtensionFilters().clear();
     fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PressChart file", "*.prc"));
