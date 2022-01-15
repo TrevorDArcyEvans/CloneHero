@@ -81,7 +81,7 @@ public class Buffer
     }
 
     // check empty expected chords and chord out of time
-    for (int i = 0; i < bufferRecords.size(); i++)
+    for (var i = 0; i < bufferRecords.size(); i++)
     {
       boolean remove = false;
       if (bufferRecords.get(i).getChord().isEmpty())
@@ -138,7 +138,7 @@ public class Buffer
      */
     public void checkHits(Chord pressedChord, Chord hitChordToUpdate)
     {
-      for (int i = 0; i < chord.getChords().length; i++)
+      for (var i = 0; i < chord.getChords().length; i++)
       {
         if (chord.getChords()[i] && pressedChord.getChords()[i])
         {
@@ -156,7 +156,7 @@ public class Buffer
      */
     public void checkUnexpectedPresses(Chord pressedChord, Chord missChordToUpdate)
     {
-      for (int i = 0; i < chord.getChords().length; i++)
+      for (var i = 0; i < chord.getChords().length; i++)
       {
           if (!chord.getChords()[i] && pressedChord.getChords()[i])
           {
@@ -172,7 +172,7 @@ public class Buffer
      */
     public void checkMisses(Chord missChordToUpdate)
     {
-      for (int i = 0; i < chord.getChords().length; i++)
+      for (var i = 0; i < chord.getChords().length; i++)
       {
           if (chord.getChords()[i])
           {

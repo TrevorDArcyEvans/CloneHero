@@ -115,7 +115,7 @@ public class GameController
         if (!report.getChordToDraw().isEmpty())
         {
           boolean[] chordArr = report.getChordToDraw().getChords();
-          for (int i = 0; i < chordArr.length; i++)
+          for (var i = 0; i < chordArr.length; i++)
           {
             if (chordArr[i])
             {
@@ -167,7 +167,7 @@ public class GameController
   {
     var gc = canvas.getGraphicsContext2D();
     gc.drawImage(background, 0, 0);
-    for (int i = 0; i < highlightedStrings.length; i++)
+    for (var i = 0; i < highlightedStrings.length; i++)
     {
       //Strings
       gc.setLineWidth(5);
@@ -248,7 +248,7 @@ public class GameController
 
     scoreLabel.setText(String.valueOf(report.getScore()));
     multiplierLabel.setText(String.format("%.1f", report.getMultiplier()) + "x");
-    for (int i = 0; i < ballAnimations.size(); i++)
+    for (var i = 0; i < ballAnimations.size(); i++)
     {
       if (ballAnimations.get(i).isFinished())
       {

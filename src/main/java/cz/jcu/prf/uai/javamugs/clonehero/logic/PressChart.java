@@ -22,7 +22,7 @@ public class PressChart
 
     int size = presses.size();
     this.presses = new Press[size];
-    for (int i = 0; i < size; i++)
+    for (var i = 0; i < size; i++)
     {
       Press press = new Press(presses.get(i).getColor(), presses.get(i).getDrawTime());
 

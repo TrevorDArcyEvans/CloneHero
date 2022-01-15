@@ -13,6 +13,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import java.io.IOException;
 
@@ -134,18 +135,7 @@ public class EditorController
     saveBtn.setVisible(false);
 
     var stage = (Stage) startBtn.getScene().getWindow();
-    stage.setOnCloseRequest(we ->
-    {
-      try
-      {
-        mediaPlayer.stop();
-      }
-      catch (Exception e)
-      {
-        //Sometimes expected ;)
-      }
-      mediaPlayer = null;
-    });
+    stage.setOnCloseRequest(this::handleOnCloseRequest);
 
     isRecording = false;
     textPresses.setDisable(true);
@@ -156,12 +146,12 @@ public class EditorController
    */
   public void startBtnAction()
   {
+    countLabel.setText(isRecording ? "Editor" : "Recording");
+    startBtn.setText(isRecording ? "Start" : "Stop");
+    saveBtn.setVisible(isRecording);
+
     if (!isRecording)
     {
-      countLabel.setText("Recording");
-      startBtn.setText("Stop");
-      isRecording = true;
-      saveBtn.setVisible(false);
       saver = new Saver();
 
       var sound = new Media(this.songPath);
@@ -171,14 +161,10 @@ public class EditorController
     }
     else
     {
-      countLabel.setText("Editor");
-      startBtn.setText("Start");
-      isRecording = false;
-      saveBtn.setVisible(true);
-
       mediaPlayer.stop();
       mediaPlayer = null;
     }
+    isRecording = !isRecording;
 
     startListenButtons();
   }
@@ -219,5 +205,18 @@ public class EditorController
 
     setNewPressToTextarea(actualPress);
     saver.addPress(actualPress);
+  }
+
+  private void handleOnCloseRequest(WindowEvent we)
+  {
+    try
+    {
+      mediaPlayer.stop();
+    }
+    catch (Exception e)
+    {
+      //Sometimes expected ;)
+    }
+    mediaPlayer = null;
   }
 }
