@@ -86,7 +86,7 @@ public class GameController
 
   private AnimationTimer getAnimationTimer()
   {
-    var animTimer = new AnimationTimer() // 60 FPS
+    return new AnimationTimer() // 60 FPS
     {
       @Override
       public void handle(long currentNanoTime)
@@ -140,7 +140,6 @@ public class GameController
         }
       }
     };
-    return animTimer;
   }
 
   /**
