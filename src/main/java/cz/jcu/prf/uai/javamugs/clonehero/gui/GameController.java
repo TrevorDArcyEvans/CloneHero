@@ -4,10 +4,12 @@ import cz.jcu.prf.uai.javamugs.clonehero.logic.Chord;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.Game;
 import cz.jcu.prf.uai.javamugs.clonehero.logic.GameReport;
 import javafx.animation.AnimationTimer;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -17,7 +19,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
+import javax.imageio.ImageIO;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Random;
@@ -41,6 +46,9 @@ public class GameController
   private final Random random = new Random();
   private Image background;
 
+  private boolean screencap;
+  private int frameCount = 1;
+
   public void setGame(Game game)
   {
     this.game = game;
@@ -54,8 +62,9 @@ public class GameController
   /**
    * Method to be called on start, after initialization
    */
-  public void start()
+  public void start(boolean screencap)
   {
+    this.screencap = screencap;
     this.stage = (Stage) rootContainer.getScene().getWindow();
     background = new Image(getClass().getResource("/bg.jpg").toString());
     stage.setOnCloseRequest(this::handleOnCloseRequest);
@@ -115,7 +124,14 @@ public class GameController
           }
         }
 
-        renderCanvas(report);
+        try
+        {
+          renderCanvas(report);
+        }
+        catch (IOException e)
+        {
+          e.printStackTrace();
+        }
         pressedButtons = new Chord(false, false, false, false, false);
         if (mediaPlayer.getCurrentTime().toMillis() >= mediaPlayer.getTotalDuration().toMillis())
         {
@@ -147,7 +163,7 @@ public class GameController
    *
    * @param report current GameReport
    */
-  private void renderCanvas(GameReport report)
+  private void renderCanvas(GameReport report) throws IOException
   {
     var gc = canvas.getGraphicsContext2D();
     gc.drawImage(background, 0, 0);
@@ -244,6 +260,18 @@ public class GameController
         ballAnimations.get(i).animate(mediaPlayer.getCurrentTime().toMillis());
       }
     }
+
+    if (screencap)
+    {
+      var width = (int) canvas.getWidth();
+      var height = (int) canvas.getHeight();
+      var writableImage = new WritableImage(width, height);
+      canvas.snapshot(null, writableImage);
+      RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
+      var file = new File("image" + String.format("%03d", frameCount) + ".png");
+      ImageIO.write(renderedImage, "png", file);
+      frameCount++;
+    }
   }
 
   private void handleOnKeyPressed(KeyEvent event)
@@ -270,23 +298,9 @@ public class GameController
 
   private void handleOnCloseRequest(WindowEvent we)
   {
-    try
-    {
-      mediaPlayer.stop();
-    }
-    catch (NullPointerException ex)
-    {
-      ex.printStackTrace();
-    }
+    mediaPlayer.stop();
     mediaPlayer = null;
-    try
-    {
-      mainCycle.stop();
-    }
-    catch (NullPointerException ex)
-    {
-      ex.printStackTrace();
-    }
+    mainCycle.stop();
     mainCycle = null;
   }
 

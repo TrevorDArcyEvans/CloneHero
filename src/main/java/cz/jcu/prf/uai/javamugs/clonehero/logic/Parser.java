@@ -41,38 +41,31 @@ public class Parser
       .map(line -> Arrays.asList(line.split(SEPARATOR)))                  //turn every line into a two field list
       .collect(Collectors.toList());                                      //collect the lists creating a 2D list
 
-    try
-    {
-      double hitTime = 0, prevHitTime, drawTime;
+    double hitTime = 0, prevHitTime, drawTime;
 
-      for (List<String> line : parsedFile)
+    for (List<String> line : parsedFile)
+    {
+
+      prevHitTime = hitTime;
+      hitTime = Double.parseDouble(line.get(0));
+
+      if (hitTime < prevHitTime)
       {
-
-        prevHitTime = hitTime;
-        hitTime = Double.parseDouble(line.get(0));
-
-          if (hitTime < prevHitTime)
-          {
-              throw new IOException("Entries in wrong order.");               //check for time ordering
-          }
-
-        drawTime = hitTime - timeOffset;
-          if (drawTime < 0.0)
-          {
-              continue;                                                       //discard early presses
-          }
-        int color = Integer.parseInt(line.get(1));
-          if (color < COLOR_MIN || color > COLOR_MAX)
-          {
-              throw new IOException("Color out of bounds");                   //check for unknown color
-          }
-
-        result.add(new Press(color, drawTime));                             //add parsed line to result
+        throw new IOException("Entries in wrong order.");               //check for time ordering
       }
-    }
-    catch (Exception e)
-    {
-      throw new IOException("Unexpected file format " + e.getMessage());
+
+      drawTime = hitTime - timeOffset;
+      if (drawTime < 0.0)
+      {
+        continue;                                                       //discard early presses
+      }
+      int color = Integer.parseInt(line.get(1));
+      if (color < COLOR_MIN || color > COLOR_MAX)
+      {
+        throw new IOException("Color out of bounds");                   //check for unknown color
+      }
+
+      result.add(new Press(color, drawTime));                             //add parsed line to result
     }
 
     openedFile.close();
@@ -91,36 +84,22 @@ public class Parser
   private BufferedReader attemptOpenFile(String fileName) throws IOException
   {
 
-      if (!fileName.endsWith(".prc"))
-      {
-          throw new IOException("Unexpected extension");
-      }
+    if (!fileName.endsWith(".prc"))
+    {
+      throw new IOException("Unexpected extension");
+    }
 
     Path path = Paths.get(fileName);
 
-    try
+    if (Files.notExists(path))
     {
-        if (Files.notExists(path))
-        {
-            throw new IOException("File not found.");
-        }
-        if (Files.size(path) > B_SIZE_LIMIT)
-        {
-            throw new IOException("File is too large");
-        }
+      throw new IOException("File not found.");
     }
-    catch (SecurityException e)
+    if (Files.size(path) > B_SIZE_LIMIT)
     {
-      throw new IOException("Access to file denied.");
+      throw new IOException("File is too large");
     }
 
-    try
-    {
-      return new BufferedReader(new FileReader(fileName));
-    }
-    catch (IOException e)
-    {
-      throw new IOException("Error opening file.");
-    }
+    return new BufferedReader(new FileReader(fileName));
   }
 }

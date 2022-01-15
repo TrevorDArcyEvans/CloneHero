@@ -14,6 +14,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import java.io.IOException;
 
 public class EditorController
 {
@@ -107,26 +108,19 @@ public class EditorController
   /**
    * Save recorded file
    */
-  private void saveFile()
+  private void saveFile() throws IOException
   {
-    try
+    fileChooser.setTitle("Select PressChart file");
+    fileChooser.getExtensionFilters().clear();
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PressChart file", "*.prc"));
+    var pressChartFile = fileChooser.showSaveDialog(startBtn.getScene().getWindow());
+    if (pressChartFile == null)
     {
-      fileChooser.setTitle("Select PressChart file");
-      fileChooser.getExtensionFilters().clear();
-      fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PressChart file", "*.prc"));
-      var pressChartFile = fileChooser.showSaveDialog(startBtn.getScene().getWindow());
-      if (pressChartFile == null)
-      {
-        return;
-      }
+      return;
+    }
 
-      var pressChartPath = pressChartFile.getAbsolutePath();
-      saver.save(pressChartPath);
-    }
-    catch (Exception e)
-    {
-      e.printStackTrace();
-    }
+    var pressChartPath = pressChartFile.getAbsolutePath();
+    saver.save(pressChartPath);
   }
 
   /**
@@ -159,7 +153,6 @@ public class EditorController
 
   /**
    * FE start/stop button
-   *
    */
   public void startBtnAction()
   {
@@ -192,9 +185,8 @@ public class EditorController
 
   /**
    * FE button to save
-   *
    */
-  public void saveBtn()
+  public void saveBtn() throws IOException
   {
     saveFile();
   }

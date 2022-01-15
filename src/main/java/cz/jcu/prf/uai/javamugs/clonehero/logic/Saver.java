@@ -40,31 +40,24 @@ public class Saver
       path += ".prc";
     }
 
-    try
-    {
-      PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(path)));
+    PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(path)));
 
-      Press toWrite;
-      long prevTime = 0, time;
-      while (!toSave.isEmpty())
+    Press toWrite;
+    long prevTime = 0, time;
+    while (!toSave.isEmpty())
+    {
+      toWrite = toSave.remove(0);
+
+      time = (long) toWrite.getDrawTime();
+      if ((time - prevTime) < 50)
       {
-        toWrite = toSave.remove(0);
-
-        time = (long) toWrite.getDrawTime();
-        if ((time - prevTime) < 50)
-        {
-          time = prevTime;
-        }
-
-        writer.println(time + ":" + toWrite.getColor());   //Draw time is actually
-        // press time int this case.
-        prevTime = time;
+        time = prevTime;
       }
-      writer.close();
+
+      writer.println(time + ":" + toWrite.getColor());   //Draw time is actually
+      // press time int this case.
+      prevTime = time;
     }
-    catch (IOException e)
-    {
-      throw new IOException("Problem with writing specified file: " + e.getMessage());
-    }
+    writer.close();
   }
 }

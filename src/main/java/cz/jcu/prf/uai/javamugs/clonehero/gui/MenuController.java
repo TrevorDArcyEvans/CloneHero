@@ -35,12 +35,14 @@ public class MenuController
   public BorderPane rootContainer;
 
   private Stage stage;
+  private boolean screencap;
 
   /**
    * Method to be called on start, after initialization
    */
-  public void start()
+  public void start(boolean screencap)
   {
+    this.screencap = screencap;
     var userDir = new File(System.getProperty("user.dir"));
     var repo = new File(userDir, Tracks);
     var repoSongs = repo.list((dir, name) -> name.toLowerCase(Locale.ROOT).endsWith(".mp3"));
@@ -58,7 +60,7 @@ public class MenuController
   /**
    * Method to be called on play button click
    */
-  public void playButtonAction()
+  public void playButtonAction() throws IOException
   {
     var userDir = new File(System.getProperty("user.dir"));
     var tracksURI = new File(userDir, Tracks);
@@ -68,22 +70,10 @@ public class MenuController
     var parser = new Parser();
     var timeOffset = (int) speedSlider.getValue();
     var difficulty = (int) difficultySlider.getValue();
+    var pressChart = parser.parseFile(pressChartPath, timeOffset);
+    var game = new Game(timeOffset, difficulty, pressChart);
 
-    try
-    {
-      var pressChart = parser.parseFile(pressChartPath, timeOffset);
-      var game = new Game(timeOffset, difficulty, pressChart);
-
-      openGameWindow(game, songURI); //TODO put method under logic
-    }
-    catch (IOException ex)
-    {
-      var alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Clone Hero");
-      alert.setHeaderText("Error while parsing the file!");
-      alert.setContentText(ex.getMessage());
-      alert.show();
-    }
+    openGameWindow(game, songURI); //TODO put method under logic
   }
 
   /**
@@ -92,62 +82,48 @@ public class MenuController
    * @param game    game core
    * @param songURI path to the song
    */
-  private void openGameWindow(Game game, URI songURI)
+  private void openGameWindow(Game game, URI songURI) throws IOException
   {
-    try
-    {
-      var loader = new FXMLLoader(getClass().getResource("/Game.fxml"));
-      Parent root = loader.load();
-      GameController gameController = loader.getController();
-      gameController.setGame(game);
-      gameController.setSongURI(songURI);
-      var gameStage = new Stage();
-      gameStage.setTitle("Clone Hero");
-      gameStage.setScene(new Scene(root));
-      gameStage.setResizable(false);
-      gameStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));
-      gameStage.show();
-      gameController.start();
-    }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
+    var loader = new FXMLLoader(getClass().getResource("/Game.fxml"));
+    Parent root = loader.load();
+    GameController gameController = loader.getController();
+    gameController.setGame(game);
+    gameController.setSongURI(songURI);
+    var gameStage = new Stage();
+    gameStage.setTitle("Clone Hero");
+    gameStage.setScene(new Scene(root));
+    gameStage.setResizable(false);
+    gameStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));
+    gameStage.show();
+    gameController.start(screencap);
   }
 
   /**
    * Method to be called on editor button click
    */
-  public void editorButtonAction()
+  public void editorButtonAction() throws IOException
   {
-    try
+    var loader = new FXMLLoader(getClass().getResource("/Editor.fxml"));
+    Parent root = loader.load();
+    EditorController editorController = loader.getController();
+    var fileChooser = GetFileChooser();
+    fileChooser.setTitle("Select song");
+    fileChooser.getExtensionFilters().clear();
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3", "*.mp3"));
+    File songFile = fileChooser.showOpenDialog(stage);
+    if (songFile == null)
     {
-      var loader = new FXMLLoader(getClass().getResource("/Editor.fxml"));
-      Parent root = loader.load();
-      EditorController editorController = loader.getController();
-      var fileChooser = GetFileChooser();
-      fileChooser.setTitle("Select song");
-      fileChooser.getExtensionFilters().clear();
-      fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("MP3", "*.mp3"));
-      File songFile = fileChooser.showOpenDialog(stage);
-      if (songFile == null)
-      {
-        return;
-      }
-
-      var editorStage = new Stage();
-      editorStage.setTitle("Clone Hero Editor");
-      editorStage.setScene(new Scene(root));
-      editorStage.setResizable(false);
-      editorStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));
-      editorStage.show();
-
-      editorController.start(songFile.toURI().toString());
+      return;
     }
-    catch (IOException e)
-    {
-      e.printStackTrace();
-    }
+
+    var editorStage = new Stage();
+    editorStage.setTitle("Clone Hero Editor");
+    editorStage.setScene(new Scene(root));
+    editorStage.setResizable(false);
+    editorStage.getIcons().add(new Image(getClass().getResource("/icon.png").toString()));
+    editorStage.show();
+
+    editorController.start(songFile.toURI().toString());
   }
 
   /**
