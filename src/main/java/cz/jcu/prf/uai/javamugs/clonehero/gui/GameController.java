@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 public class GameController
@@ -66,7 +67,7 @@ public class GameController
   {
     this.screencap = screencap;
     this.stage = (Stage) rootContainer.getScene().getWindow();
-    background = new Image(getClass().getResource("/bg.jpg").toString());
+    background = new Image(Objects.requireNonNull(getClass().getResource("/bg.jpg")).toString());
     stage.setOnCloseRequest(this::handleOnCloseRequest);
 
     //Key presses
