@@ -9,12 +9,7 @@ import java.util.List;
 
 public class Saver
 {
-  private final List<Press> toSave;
-
-  public Saver()
-  {
-    toSave = new ArrayList<>();
-  }
+  private final List<Press> toSave = new ArrayList<>();
 
   /**
    * Adds a press to be processed.
